@@ -25,6 +25,23 @@ namespace Demo_Interfaces_Animals
                 Habitat = "Grasslands",
                 AnimalsEaten = new List<string>() { "Deer", "Slow People" }
             };
+
+            Human john = new Human()
+            {
+                Name = "John",
+                NumberOfLegs = 2,
+                Habitat = "Small Brewpubs",
+                VegetationEaten = new List<string>() { "Apples", "Lettuce" },
+                AnimalsEaten = new List<string>() { "Pig", "Shrimp" }
+            };
+
+            Console.Write(bob.Name + " eats the following ");
+            if (bob is IHerbivore)
+            {
+                Console.WriteLine($"vegetation: {bob.VegetationEaten[0]} and {bob.VegetationEaten[1]}.");
+            }
+
+            Console.ReadKey();
         }
     }
 }

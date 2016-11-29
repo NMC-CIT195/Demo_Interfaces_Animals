@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo_Interfaces_Animals.Models
+namespace Demo_Interfaces_Animals
 {
     public class Human : Animal, IHerbivore, ICarnivore
     {
