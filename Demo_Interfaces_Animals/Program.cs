@@ -20,7 +20,7 @@ namespace Demo_Interfaces_Animals
 
             Lion leon = new Lion()
             {
-                Name = "leon",
+                Name = "Leon",
                 NumberOfLegs = 4,
                 Habitat = "Grasslands",
                 AnimalsEaten = new List<string>() { "Deer", "Slow People" }
@@ -35,10 +35,49 @@ namespace Demo_Interfaces_Animals
                 AnimalsEaten = new List<string>() { "Pig", "Shrimp" }
             };
 
-            Console.Write(bob.Name + " eats the following ");
-            if (bob is IHerbivore)
+            List<Animal> animals = new List<Animal>() { bob, leon, john };
+
+            foreach (Animal animal in animals)
             {
-                Console.WriteLine($"vegetation: {bob.VegetationEaten[0]} and {bob.VegetationEaten[1]}.");
+                DisplayFoodsEaten(animal);
+            }
+
+            Console.ReadKey();
+
+            DisplayLookAtAnimals(animals);
+        }
+
+        public static void DisplayFoodsEaten(Animal animal)
+        {
+            Console.WriteLine(animal.Name + " eats the following: ");
+            if (animal is IHerbivore)
+            {
+                var theAnimal = animal as IHerbivore;
+                Console.WriteLine($"Vegetation: {theAnimal.VegetationEaten[0]} and {theAnimal.VegetationEaten[1]}.");
+            }
+            if (animal is ICarnivore)
+            {
+                var theAnimal = animal as ICarnivore;
+                Console.WriteLine($"Animals: {theAnimal.AnimalsEaten[0]} and {theAnimal.AnimalsEaten[1]}.");
+            }
+            Console.WriteLine();
+        }
+
+        public static void DisplayLookAtAnimals(List<Animal> animals)
+        {
+            Console.Clear();
+            Console.WriteLine("You are in a large room and notice the following animals.");
+            foreach (Animal animal in animals)
+            {
+                Console.WriteLine($" You notice a {animal.GetType().Name}. It has {animal.NumberOfLegs} legs.");
+                if (animal is Lion)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("\t\t************************************");
+                    Console.WriteLine("\t\t* You have been eaten by a lion!!! *");
+                    Console.WriteLine("\t\t************************************");
+                    Console.WriteLine();
+                }
             }
 
             Console.ReadKey();
