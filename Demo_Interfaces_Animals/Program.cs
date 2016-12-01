@@ -35,8 +35,16 @@ namespace Demo_Interfaces_Animals
                 AnimalsEaten = new List<string>() { "Pig", "Shrimp" }
             };
 
+            //
+            // Create a list of the base class Animal to hold objects from 
+            // all of the derived classes.
+            //
             List<Animal> animals = new List<Animal>() { bob, leon, john };
 
+            //
+            // Loop through the list of animals and display the foods they eat.
+            //
+            Console.WriteLine("A list of animals and what they eat.\n");
             foreach (Animal animal in animals)
             {
                 DisplayFoodsEaten(animal);
@@ -44,32 +52,49 @@ namespace Demo_Interfaces_Animals
 
             Console.ReadKey();
 
-            DisplayLookAtAnimals(animals);
+            //
+            // Display a list of all animals in the room and
+            // the number of legs they have.
+            // Display a special message when looking at a lion.
+            //
+            DisplayAnimalsISee(animals);
         }
 
+        /// <summary>
+        /// Display the list of foods eaten by type for each animal.
+        /// Note that to have a concise example, list items are referenced by index number.
+        /// A "foreach" loop should be used to display all list items.
+        /// </summary>
+        /// <param name="animal">list of animals</param>
         public static void DisplayFoodsEaten(Animal animal)
         {
             Console.WriteLine(animal.Name + " eats the following: ");
             if (animal is IHerbivore)
             {
                 var theAnimal = animal as IHerbivore;
-                Console.WriteLine($"Vegetation: {theAnimal.VegetationEaten[0]} and {theAnimal.VegetationEaten[1]}.");
+                Console.WriteLine($"\tVegetation: {theAnimal.VegetationEaten[0]} and {theAnimal.VegetationEaten[1]}.");
             }
             if (animal is ICarnivore)
             {
                 var theAnimal = animal as ICarnivore;
-                Console.WriteLine($"Animals: {theAnimal.AnimalsEaten[0]} and {theAnimal.AnimalsEaten[1]}.");
+                Console.WriteLine($"\tAnimals: {theAnimal.AnimalsEaten[0]} and {theAnimal.AnimalsEaten[1]}.");
             }
+
             Console.WriteLine();
         }
 
-        public static void DisplayLookAtAnimals(List<Animal> animals)
+        /// <summary>
+        /// Display all animals in the list of animals and flag when
+        /// a lion is displayed with a special message.
+        /// </summary>
+        /// <param name="animals">list of animals</param>
+        public static void DisplayAnimalsISee(List<Animal> animals)
         {
             Console.Clear();
             Console.WriteLine("You are in a large room and notice the following animals.");
             foreach (Animal animal in animals)
             {
-                Console.WriteLine($" You notice a {animal.GetType().Name}. It has {animal.NumberOfLegs} legs.");
+                Console.WriteLine($"\tYou notice a {animal.GetType().Name}. It has {animal.NumberOfLegs} legs.");
                 if (animal is Lion)
                 {
                     Console.WriteLine();
